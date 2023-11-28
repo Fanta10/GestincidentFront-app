@@ -21,7 +21,7 @@ export class HomeComponent {
   public ngOnInit(): void {
 
     this.appComponent.routeTitle = "Tableau de bord"
-    this.appComponent.routeDescription = "Bienvenue, " + this.nomAdmin
+    //this.appComponent.routeDescription = "Bienvenue, " + this.nomAdmin
     this.hello();
   }
 

@@ -5,6 +5,7 @@ import { Environ } from 'src/app/components/environ/models/environ';
 import { Logiciel } from 'src/app/components/logiciel/models/logiciel';
 import { AuthService } from 'src/app/service/auth.service';
 import { Incident } from '../models/incident';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -19,13 +20,15 @@ export class IncidentComponent implements OnInit{
   environment : Environ[] = [];
   myForm! : FormGroup;
 
+
   constructor(
     private service: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private appComponent:AppComponent,
   ) { }
   ngOnInit(): void {
-
+    this.appComponent.routeTitle = "Mode opératoire"
 
     this.myForm = this.fb.group({
 

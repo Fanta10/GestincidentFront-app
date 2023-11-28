@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit{
         //this.loginForm.reset();
 
       }
-      if(this.loginForm.value == ""){
+      else{
         this.appComponent.showError("Login / Mot de passe incorrect.")
       this.submitEnabled = true
       }

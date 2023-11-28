@@ -18,6 +18,7 @@ import { LogicielComponent } from './components/logiciel/logiciel/logiciel.compo
 import { CreatelogicielComponent } from './components/logiciel/create/createlogiciel/createlogiciel.component';
 import { IncidentComponent } from './components/incident/incident/incident.component';
 import { CreateincidentComponent } from './components/incident/create/createincident/createincident.component';
+import { NavbarComponent } from './components/navbar/navbar/navbar.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CreateincidentComponent } from './components/incident/create/createinci
     LogicielComponent,
     CreatelogicielComponent,
     IncidentComponent,
-    CreateincidentComponent
+    CreateincidentComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

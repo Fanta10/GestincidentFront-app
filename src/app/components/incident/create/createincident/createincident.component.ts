@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 import { PayloadIncident } from '../../models/payload-incident';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -26,10 +27,12 @@ export class CreateincidentComponent implements OnInit{
   constructor(
     private service: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private appComponent:AppComponent,
   ) { }
 
   ngOnInit(): void {
+    this.appComponent.routeTitle = "Incident"
 
     this.myForm = this.fb.group({
 
