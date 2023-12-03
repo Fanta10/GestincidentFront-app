@@ -54,7 +54,7 @@ save() {
         console.log(data)
         //alert("succes")
         window.location.reload();
-
+        console.log("log" +this.myForm.value)
 
 
       },
@@ -63,7 +63,7 @@ save() {
         alert("error")
       }
     });
-    console.log(this.myForm.value)
+    
   }
 }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
 
 
@@ -13,7 +14,8 @@ export class SignupComponent implements OnInit{
 
   constructor(
     private service: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private appComponent : AppComponent
   ) { }
 
   ngOnInit() {
@@ -25,7 +27,7 @@ export class SignupComponent implements OnInit{
     }, { validator: this.passwordMatchValidator })
   }
 
-  private passwordMatchValidator(fg: FormGroup) {
+   passwordMatchValidator(fg: FormGroup) {
     const password = fg.get('password')?.value;
     const confirmPassword = fg.get('confirmPassword')?.value;
     if (password != confirmPassword) {

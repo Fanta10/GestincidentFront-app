@@ -44,7 +44,8 @@ import { NavbarComponent } from './components/navbar/navbar/navbar.component';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
 
   ],
   providers: [],

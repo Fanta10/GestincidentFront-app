@@ -16,6 +16,8 @@ export class RexComponent implements OnInit {
   myFormenv! : FormGroup;
   productId! : number;
 
+  rexPage : any={};
+
   constructor(
     private service: AuthService,
     private fb: FormBuilder,
@@ -24,6 +26,8 @@ export class RexComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getRexPage(0, 3);
+    //this.getRexPages(0, 10);
     this.appComponent.routeTitle = "Liste des Rex d'applications"
     this.myFormenv = this.fb.group({
 
@@ -72,7 +76,7 @@ export class RexComponent implements OnInit {
     this.service.updateRex(this.myFormenv.value).subscribe({
       next : data1 => {
         console.log(data1);
-        alert("succes")
+        //alert("succes")
         //console.log(data1)
         window.location.reload();
       },
@@ -84,5 +88,33 @@ export class RexComponent implements OnInit {
 
   }
 
+
+
+
+  getRexPage(pageNumber: number, pageSize: number): void {
+    this.service.getRexPage(pageNumber, pageSize).subscribe(
+      (response) => {
+        console.log('Rex Page:', response);
+        this.rexPage = response;
+        // Vous pouvez maintenant utiliser this.rexPage.content pour accéder à la liste des éléments Rex.
+      },
+      (error) => {
+        console.error('Error fetching Rex Page:', error);
+        // Gérez l'erreur, par exemple, affichez un message à l'utilisateur.
+      }
+    );
+  }
+
+  getRexPages(pageNumber: number, pageSize: number): void {
+    this.service.getEnvPage(pageNumber, pageSize).subscribe(
+      (response) => {
+        console.log('Rex Page:', response);
+        this.rexPage = response;
+      },
+      (error) => {
+        console.error('Error fetching Rex Page:', error);
+      }
+    );
+  }
 
 }

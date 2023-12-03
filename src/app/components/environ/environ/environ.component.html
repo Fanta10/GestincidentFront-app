@@ -15,7 +15,7 @@
   </thead>
   <tbody>
 
-    <tr *ngFor="let materiel of materiels">
+    <tr *ngFor="let materiel of envPage.content">
       <td>{{materiel.libelleEnv}}</td>
 
 
@@ -75,3 +75,34 @@
   </div>
 </div>
 
+
+
+<!--  -->
+
+<div class="container mt-4">
+  <!-- <h2>Liste des REX</h2>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let rex of envPage">
+      {{ rex.libelle }}
+    </li>
+  </ul> -->
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="envPage.first">
+        <a class="page-link" (click)="getEnvPage(envPage.number - 1, envPage.size)" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <!-- <li class="page-item" *ngFor="let i of Array(envPage.totalPages).fill(0).map((x, i) => i)">
+        <a class="page-link" (click)="getEnvPage(i, envPage.size)">{{ i + 1 }}</a>
+      </li> -->
+      <li class="page-item" [class.disabled]="envPage.last">
+        <a class="page-link" (click)="getEnvPage(envPage.number + 1, envPage.size)" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

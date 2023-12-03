@@ -61,5 +61,14 @@ export class IncidentComponent implements OnInit{
 })
 }
 
+ mode(){
+
+  this.service.getFile(this.myForm.value).subscribe((res : any) =>{
+    console.log("res" + JSON.stringify(res))
+    window.open(res.url_doc, '_blank');
+  });
+
+
+ }
 
 }

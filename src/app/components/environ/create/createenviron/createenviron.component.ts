@@ -48,8 +48,10 @@ export class CreateenvironComponent implements OnInit{
 
     //})
     this.searchFormGroup=this.fb.group({
-      keyword : this.fb.control("")
+      keyword : ['', Validators.required]
     });
+
+
     this.search();
 
 
@@ -63,6 +65,7 @@ export class CreateenvironComponent implements OnInit{
         next : data2 => {
           this.customers = JSON.stringify(data2)
           console.log(data2);
+          this.searchFormGroup.reset()
 
          // window.location.reload();
 
@@ -81,6 +84,8 @@ export class CreateenvironComponent implements OnInit{
     //   })
     // );
 }
+
+
 
   save(){
     if(this.myFormenv.invalid){

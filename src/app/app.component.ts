@@ -13,11 +13,11 @@ export class AppComponent implements OnInit, AfterContentChecked {
   protected infoMsg = ""
 
   constructor(
-    protected changeDetector: ChangeDetectorRef,
+    private changeDetector: ChangeDetectorRef,
     )  {
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
   ngAfterContentChecked() : void {
       this.changeDetector.detectChanges();
   }

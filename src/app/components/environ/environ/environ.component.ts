@@ -16,6 +16,9 @@ export class EnvironComponent implements OnInit{
   // rex : Rex[] = [];
   myFormenv! : FormGroup;
   mat! : Environ;
+  envPage!: any;
+  searchFormGroup!: FormGroup;
+  customers: Environ[] = [];
 
   constructor(
     private service: AuthService,
@@ -25,6 +28,13 @@ export class EnvironComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
+
+    this.searchFormGroup=this.fb.group({
+      keyword : ['',Validators.required]
+    });
+
+    this.getEnvPage(0, 3); // Charger la première page lors de l'initialisation du composant
+
     this.appComponent.routeTitle = "Liste des environnements"
 
 
@@ -103,4 +113,18 @@ export class EnvironComponent implements OnInit{
 
 
 }
+
+getEnvPage(pageNumber: number, pageSize: number) {
+  this.service.getEnvPage(pageNumber, pageSize).subscribe(
+    (response) => {
+      console.log('Rex Page:', response);
+      this.envPage = response;
+    },
+    (error) => {
+      console.error('Error fetching Rex Page:');
+    }
+  );
+}
+
+
 }

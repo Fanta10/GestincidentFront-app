@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
@@ -8,9 +8,11 @@ import { AuthService } from 'src/app/service/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+
   public nomAdmin:string="Super admin"
   message!: String;
+
   constructor(
     private router:Router,
     private appComponent:AppComponent,

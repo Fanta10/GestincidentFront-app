@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Logiciel } from '../models/logiciel';
-import { Rex } from '../models/rex';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { AuthService } from 'src/app/service/auth.service';
+import { Logiciel } from '../models/logiciel';
+import { Rex } from '../models/rex';
 
 @Component({
   selector: 'app-logiciel',
@@ -17,6 +17,8 @@ export class LogicielComponent implements OnInit{
   mat! : Logiciel;
   myFormenv! : FormGroup;
   //mat! : Environ
+  appPage!: any;
+
   constructor(
     private service: AuthService,
     private fb: FormBuilder,
@@ -25,7 +27,11 @@ export class LogicielComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
+
+    this.getAppPage(0,3)
+
     this.appComponent.routeTitle = "Liste des applications"
+
     this.myFormenv = this.fb.group({
 
       idApp : 0,
@@ -60,7 +66,7 @@ export class LogicielComponent implements OnInit{
   chargeData(appl : Logiciel){
     this.mat = appl;
     this.myFormenv.patchValue({
-      idEnv: appl.idApp,
+      idApp: appl.idApp,
       libelleApp: appl.libelleApp,
       descriptionApp: appl.descriptionApp,
       rex: appl.rex.idRex
@@ -87,11 +93,15 @@ export class LogicielComponent implements OnInit{
 
   }
   edit(){
-    this.service.updateLogiciel(this.myFormenv.value).subscribe({
+    let idApp = this.myFormenv.get('idApp')?.value;
+    // let libelleApp = this.myFormenv.get('libelleApp')?.value;
+    // let descriptionApp = this.myFormenv.get('descriptionApp')?.value;
+    // let rex = this.myFormenv.get('rex')?.value;
+    this.service.updateLogiciel(idApp, this.myFormenv.value).subscribe({
       next : data1 => {
         console.log(data1);
         alert("succes")
-        //console.log(data1)
+        console.log(this.myFormenv.value)
         window.location.reload();
       },
       error : error => {
@@ -99,7 +109,19 @@ export class LogicielComponent implements OnInit{
         alert("error")
       }
     });
+    console.log(this.myFormenv.value)
+  }
 
+  getAppPage(pageNumber: number, pageSize: number) {
+    this.service.getAppPage(pageNumber, pageSize).subscribe(
+      (response) => {
+        console.log('app Page:', response);
+        this.appPage = response;
+      },
+      (error) => {
+        console.error('Error fetching Rex Page:');
+      }
+    );
   }
 
 }

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Logiciel } from '../components/logiciel/models/logiciel';
 
 const BASE_URL = ['http://localhost:8070/']
 
@@ -21,8 +22,26 @@ export class AuthService {
     return this.http.post(BASE_URL + "authenticate", loginRequest)
   }
 
+  getRexPage(pageNumber: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(BASE_URL + "v1/rex/page/"+pageNumber+"/"+pageSize, {headers : this.httpHeader()});
+  }
+  getEnvPage(pageNumber: number, pageSize: number): Observable<any> {
+    return this.http.get(BASE_URL + "v1/environnement/page/"+pageNumber+"/"+pageSize,{headers : this.httpHeader()});
+  }
+
+  getFile(res: any){
+    return this.http.get(BASE_URL + "v1/incident/load/"+res.incident+"/"+res.environment+ "/" + res.logiciel,{headers : this.httpHeader()});
+  }
+
+  getAppPage(pageNumber: number, pageSize: number): Observable<any> {
+    return this.http.get(BASE_URL + "v1/logiciel/page/"+pageNumber+"/"+pageSize,{headers : this.httpHeader()});
+  }
+
   hello(): Observable<any> {
     return this.http.get(BASE_URL + 'v1/hello', {headers : this.httpHeader()});
+  }
+  Pagerex(){
+    return ;
   }
 
   createRex(rexRequest: any): Observable<any> {
@@ -46,8 +65,8 @@ export class AuthService {
   listLogiciel(): Observable<any> {
     return this.http.get(BASE_URL + "v1/logiciel",  {headers : this.httpHeader()});
   }
-  updateLogiciel(logicielRequest: any): Observable<any> {
-    return this.http.put(BASE_URL + "v1/logiciel", logicielRequest, {headers : this.httpHeader()});
+  updateLogiciel(id : number , logicielRequest : any): Observable<any> {
+    return this.http.put(`${BASE_URL}v1/logiciel/${id}`,logicielRequest, {headers : this.httpHeader()});
   }
   deleteLogiciel(id:number): Observable<any> {
     return this.http.delete(`${BASE_URL}v1/logiciel/${id}`, {headers : this.httpHeader()})
